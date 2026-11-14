@@ -24,6 +24,8 @@ AB_OTA_PARTITIONS += \
     vbmeta \
     vbmeta_system \
     vendor \
+    vendor_dlkm \
+    odm \
     vendor_boot
 BOARD_USES_RECOVERY_AS_BOOT := true
 TARGET_NO_RECOVERY := true
@@ -99,18 +101,18 @@ BOARD_VENDOR_BOOTIMAGE_PARTITION_SIZE := 100663296
 BOARD_DTBOIMG_PARTITION_SIZE := 25165824
 BOARD_HAS_LARGE_FILESYSTEM := true
 # Lineage 23.2 uses ext4 for logical partitions (not erofs)
-BOARD_SYSTEMIMAGE_PARTITION_TYPE := ext4
-BOARD_SYSTEMIMAGE_FILE_SYSTEM_TYPE := ext4
-BOARD_SYSTEM_EXTIMAGE_FILE_SYSTEM_TYPE := ext4
-BOARD_PRODUCTIMAGE_FILE_SYSTEM_TYPE := ext4
-BOARD_VENDORIMAGE_FILE_SYSTEM_TYPE := ext4
+BOARD_SYSTEMIMAGE_PARTITION_TYPE := erofs
+BOARD_SYSTEMIMAGE_FILE_SYSTEM_TYPE := erofs
+BOARD_SYSTEM_EXTIMAGE_FILE_SYSTEM_TYPE := erofs
+BOARD_PRODUCTIMAGE_FILE_SYSTEM_TYPE := erofs
+BOARD_VENDORIMAGE_FILE_SYSTEM_TYPE := erofs
 BOARD_USERDATAIMAGE_FILE_SYSTEM_TYPE := f2fs
 TARGET_COPY_OUT_VENDOR := vendor
 TARGET_COPY_OUT_PRODUCT := product
 TARGET_COPY_OUT_SYSTEM_EXT := system_ext
 BOARD_SUPER_PARTITION_SIZE := 8589934592
 BOARD_SUPER_PARTITION_GROUPS := mot_dp_group
-BOARD_MOT_DP_GROUP_PARTITION_LIST := product system system_ext vendor
+BOARD_MOT_DP_GROUP_PARTITION_LIST := product system system_ext vendor vendor_dlkm odm
 BOARD_MOT_DP_GROUP_SIZE := 8585740288
 
 # Platform
@@ -186,9 +188,9 @@ RECOVERY_LIBRARY_SOURCE_FILES += \
 # TWRP Configuration
 _empty :=
 _space := $(_empty) $(_empty)
-TW_DEVICE_VERSION := 0_lineage_by$(_space)LuoJuly
+TW_DEVICE_VERSION := TWRP-16.2-xpeng-5.10
 TW_THEME := portrait_hdpi
-# en + zh_CN only (slim-ramdisk.sh); full language pack bloats twres.
+# en + pt_BR only (slim-ramdisk.sh); full language pack bloats twres.
 TW_EXTRA_LANGUAGES := false
 # Keep screen on at boot so a failed touch/display bring-up is not mistaken for a
 # dead boot (TW_SCREEN_BLANK_ON_BOOT blanks until first input).
